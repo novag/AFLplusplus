@@ -383,6 +383,8 @@ u8 *describe_op(afl_state_t *afl, u8 new_bits, size_t max_description_len) {
 
   }
 
+  sprintf(ret + strlen(ret), ",prev_crash_time:%llu", afl->last_crash_time);
+
   if (is_timeout) { strcat(ret, ",+tout"); }
 
   if (new_bits == 2) { strcat(ret, ",+cov"); }
