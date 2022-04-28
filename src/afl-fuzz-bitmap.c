@@ -307,7 +307,10 @@ u8 *describe_op(afl_state_t *afl, u8 new_bits, size_t max_description_len) {
 
   if (unlikely(afl->syncing_party)) {
 
-    sprintf(ret, "sync:%s,src:%06u", afl->syncing_party, afl->syncing_case);
+    sprintf(ret, "sync:%s,src:%06u,time:%llu,execs:%llu",
+            afl->syncing_party, afl->syncing_case,
+            get_cur_time() + afl->prev_run_time - afl->start_time,
+            afl->fsrv.total_execs);
 
   } else {
 
